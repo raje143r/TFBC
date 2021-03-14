@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+<TITLE>Trade Finance </TITLE>
+
+
+<header> 
+	
+	<h1 style="text-align: center; font-size:50px;">TRADE FINANCE SOLUTIONS </h1>
+	<div align="right">          
+	<input type="button" onclick=window.open('index.html','_self') value="Logout"/>
+    </div>
+</header> 
+
+
+
+<style>
+
+header {
+  background-color: #00264d;
+  padding: 1px;
+  text-align: left;
+  font-size: 12px;
+  color: white;
+}	
+
+footer {
+  background-color: #00264d;
+  padding: 10px 0;
+  text-align: center;
+  color: white;
+  width: 100%;
+}	
+
+label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}​
+	
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+ <script>
+ window.onload = function() {
+ document.getElementById("Save").onclick = function fun() {
+ var lcidvalue = document.forms["myForm"]["LCID"].value;
+ 
+  const params = {
+		lcId:lcidvalue,
+    }
+	const payload = "lcId=" + lcidvalue;
+		 var Url='http://184.105.118.112:3000/tfbc/getLCHistory';
+		 var xhr = new XMLHttpRequest();
+		 xhr.open('POST', Url, true);
+		 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		 xhr.send(payload);
+		 //xhr.send(JSON.stringify(params));
+		 console.log(params);
+		xhr.onreadystatechange = processRequest;
+		 function processRequest(e) {
+		
+		if (xhr.readyState == 4 && xhr.status == 200) {
+				 var response1 = JSON.parse(xhr.responseText);
+				 console.log(response1);
+			document.getElementById("TxID").innerHTML ='';	
+			for(var i=0;i<response1.length;i++){
+				var test = response1[i];
+				document.getElementById("TxID").innerHTML += '<br>TxID: ' + test.TxId + ' Status: ' +test.Value.status + ' Buyer: ' + test.Value.buyer + ' Seller: '  + test.Value.seller + 'Amount: ' + test.Value.amount + ' PaidAmount: ' + test.Value.paidamount + ' WayBill: ' + test.Value.awb;
+				
+
+				}	
+				
+		 }
+	
+ }
+ }
+ }
+</script>
+</head>
+<<body>  
+
+  <h1 style="text-align: center; color:#00264d">Enter LCID to retrieve LC History </h1> 
+  <div id="Get Lc" class="tabcontent">
+ <form name="myForm">
+<center>
+<label>Enter a valid LC ID:</label>	
+	<INPUT TYPE="text" NAME="LCID"  VALUE="">
+	<input type="button" id="Save" onclick="f1()" value="Retrieve LC"/>
+	 </center>
+</form>
+
+ <br><br> 
+ <div id="TxID">
+ 
+ </div>
+ </center>
+  <footer> Designed by Group3 Labs</footer> 
+</body>
+</html>

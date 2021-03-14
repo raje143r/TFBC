@@ -1,0 +1,159 @@
+<HTML>
+<HEAD>
+	
+<TITLE>Trade Finance </TITLE>
+
+
+<header> 
+	<h1 style="text-align: center; font-size:50px;">TRADE FINANCE SOLUTIONS </h1>
+	</br>           
+</header> 
+<marquee>Welcome to TF page, Please contact our team to resolve any issues during LC flow test@tfbc.com and tollfree number 0000000</marquee>
+
+
+<style>
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+  background-color: #00264d;
+}
+
+.right {
+  right: 0;
+  background-color: white;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
+header {
+ 
+  background-color: #00264d;
+  padding: 1px;
+  text-align: left;
+  font-size: 12px;
+  color: white;
+}	
+
+footer {
+  background-color: #00264d;
+  padding: 6px 0;
+  text-align: center;
+  color: white;
+  width: 100%;
+}	
+
+label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}​
+	
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<SCRIPT LANGUAGE="JavaScript">
+
+
+function check(form)/*function to check userid & password*/
+{
+ /*the following code checkes whether the entered userid and password are matching*/
+ if(form.userid.value == "buyerbank" && form.pswrd.value == "buyerbank")
+  {
+    window.open('BuyerBankInfo.html','_self')/*opens the target page while Id & password matches*/
+  }
+ else if(form.userid.value == "buyer" && form.pswrd.value == "buyer")
+ {
+	window.open('BuyerInfo.html','_self')/*opens the target page while Id & password matches*/
+
+  }
+ else if(form.userid.value == "seller" && form.pswrd.value == "seller")
+ {
+	window.open('SellerInfo.html','_self')/*opens the target page while Id & password matches*/
+
+  }
+  else if(form.userid.value == "sellerbank" && form.pswrd.value == "sellerbank")
+ {
+	window.open('SellerBankInfo.html','_self')/*opens the target page while Id & password matches*/
+
+  }
+   else if(form.userid.value == "carrier" && form.pswrd.value == "carrier")
+ {
+	window.open('CarrierInfo.html','_self')/*opens the target page while Id & password matches*/
+
+  }
+  else{
+      alert("Please enter valid credentials");
+  }
+}
+</SCRIPT>
+ 
+
+</HEAD>
+
+
+<BODY>
+<div class="split left">
+  <div class="centered">
+   <h1 style="text-align: center; font-size:50px; color:white">TRADE FINANCE SOLUTIONS </h1>
+   <marquee><font color="white">Welcome to TF page, Please contact our team to resolve any issues during LC flow test@tfbc.com and tollfree number 0000000</font></marquee>
+  </div>
+</div>	
+<div class="split right">
+ <h1 style="text-align:center"><font color="#00264d">Now getting Letter Of Credits is easy...!</font></h1>
+     
+ <div class="centered">
+<form name="login" autocomplete="off">
+<br/>
+
+<center><h3><font color="green">Please enter your credentials</font></h3></center>
+Username:	<input type="text" name="userid"/>
+<br/>
+<br/>
+Password:	 <input type="password" name="pswrd"/>
+<br/>
+<br/>
+<input type="button" onclick="check(this.form)" value="Login"/>
+<input type="reset" value="Reset/Cancel"/><br><br><br>
+<footer> Designed by Group3 Labs</footer> 
+</form>	
+</div>
+</div>
+
+</BODY>
+<!-- <footer> Designed by GL3 Labs</footer>  -->
+</HTML>
+
+

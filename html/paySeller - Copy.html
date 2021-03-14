@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<TITLE>Trade Finance </TITLE>
+
+
+<header> 
+	<div align="right"><h3>Click here to logout</h3></div>
+	</br> 
+	<div align="right">          
+	<input type="button" onclick=window.open('index.html','_self') value="Logout"/>
+    </div>
+</header> 
+
+
+
+<style>
+
+header {
+  background-color: #666;
+  padding: 1px;
+  text-align: left;
+  font-size: 12px;
+  color: white;
+}	
+
+footer {
+  background-color: #666;
+  padding: 10px 0;
+  text-align: center;
+  color: white;
+  width: 100%;
+}	
+
+label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}​
+	
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+ <script>
+ window.onload = function() {
+ document.getElementById("Save").onclick = function fun() {
+ var x = document.forms["myForm"]["lcID"].value;
+  var x1 = document.forms["myForm"]["paidamount"].value;
+ alert("Testing");
+  const params = {
+		lcID:x,
+		paidamount:x1,
+		    }
+	const payload = "lcID="+x +"&paidamount=" + x1 ;
+	 alert(payload);
+		 var Url='http://184.105.118.112:3000/tfbc/paySeller';
+		 var xhr = new XMLHttpRequest();
+		 xhr.open('POST', Url, true);
+		 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		 xhr.send(payload);
+		 //xhr.send(JSON.stringify(params));
+		 
+		 console.log(params);
+		 xhr.onreadystatechange = processRequest;
+		 function processRequest(e) {
+		 
+		 if (xhr.readyState == 4 && xhr.status == 200) {
+		  //alert(xhr.responseText.headers.Host);
+		 var response1 = JSON.parse(xhr.responseText);
+		 
+		  showArtists(response1);
+		  
+		  
+		 }
+ }
+ }
+ }
+</script>
+</head>
+<<body bgcolor="Lightskyblue">  
+  <h1 style="text-align: center;">Enter details for Shipment</h1> 
+  <div id="shipGoods" class="tabcontent">
+ <form name="myForm">
+<label>LcID:</label>	<INPUT TYPE="text" NAME="lcID"  VALUE="LC001"><br><br>
+<label>PaidAmount:</label>	<INPUT TYPE="text" NAME="paidamount"  VALUE="0"><br><br>
+ <input type="button" id="Save" onclick="f1()" value="Submit"/>
+</form>
+ <br><br> 
+ </center>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<TITLE>Trade Finance </TITLE>
+
+
+<header> 
+	
+	<h1 style="text-align: center; font-size:50px;">TRADE FINANCE SOLUTIONS </h1>
+	<div align="right">          
+	<input type="button" onclick=window.open('index.html','_self') value="Logout"/>
+    </div>
+</header> 
+
+
+
+<style>
+
+header {
+  background-color: #00264d;
+  padding: 1px;
+  text-align: left;
+  font-size: 12px;
+  color: white;
+}	
+
+footer {
+  background-color: #00264d;
+  padding: 10px 0;
+  text-align: center;
+  color: white;
+  width: 100%;
+}	
+
+label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+  color: #00264d;
+}​
+	
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+ <script>
+ window.onload = function() {
+ document.getElementById("Save").onclick = function fun() {
+ var ID = Math.random().toString(36).substr(2, 9);
+ <!-- var x = document.forms["myForm"]["LCID"].value; -->
+ var x1 = document.forms["myForm"]["BUYER"].value;
+ var x2 = document.forms["myForm"]["BUYERBANK"].value;
+ var x4 = document.forms["myForm"]["SELLERBANK"].value;
+ var x5 = document.forms["myForm"]["SELLER"].value;
+ var x6 = document.forms["myForm"]["CARRIER"].value;
+ var x7 = document.forms["myForm"]["EXPIRY"].value;
+ var x8 = document.forms["myForm"]["AMOUNT"].value;
+ var x9 = document.forms["myForm"]["paidamount"].value;
+ var x10 = document.forms["myForm"]["awb"].value;
+  const params = {
+		lcId:ID,
+		buyer:x1,
+		buyerbank:x2,
+		sellerbank:x4,
+		seller:x5,
+		carrier:x6,
+		expiryDate:x7,
+		amount:x8,
+		paidamount:x9,
+		awb:x10,
+    }
+	const payload = "lcId=" + ID +"&buyer=" + x1 + "&buyerbank=" + x2 + "&sellerbank=" + x4 + "&seller=" + x5 + "&carrier=" + x6 + "&expiryDate=" + x7 + "&amount=" + x8 + "&paidamount=" + x9 + "&awb=" + x10;
+ var Url='http://184.105.118.112:3000/tfbc/requestLC';
+ var xhr = new XMLHttpRequest();
+ xhr.open('POST', Url, true);
+ xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+ xhr.send(payload);
+ //xhr.send(JSON.stringify(params));
+			 console.log(params);
+			 xhr.onreadystatechange = processRequest;
+			 function processRequest(e) {							
+		if (xhr.readyState == 4 && xhr.status == 200) {
+				 var response1 = JSON.parse(xhr.responseText);
+				  console.log(response1);
+				 document.getElementById("lcId").innerHTML = "Keep the below reference number for future reference.It cannot be recovered once Lost";
+				 document.getElementById("buyer").innerHTML = ID;
+			    
+				}
+			}
+	}
+ }
+</script>
+</head>
+<<body>  
+  <h1 style="text-align: center; color:#00264d">Enter details to RequestLC</h1> 
+  <div id="Request Lc" class="tabcontent">
+ <form name="myForm">
+ <center>
+<label>Buyer:</label>	<INPUT TYPE="text" NAME="BUYER"  VALUE=""><br><br>
+<label>BuyerBank:</label>	<INPUT TYPE="text" NAME="BUYERBANK" VALUE=""><br><br>
+<label>SellerBank:</label>	<INPUT TYPE="text" NAME="SELLERBANK"  VALUE=""><br><br>	
+<label>Seller:</label>	<INPUT TYPE="text" NAME="SELLER" VALUE=""><br><br>
+<label>Carrier:</label>	<INPUT TYPE="text" NAME="CARRIER"  VALUE=""><br><br>
+<label>ExpiryDate:</label>	<INPUT TYPE="date" NAME="EXPIRY" VALUE="" ><br><br>
+<label>Amount:</label>	<INPUT TYPE="number" NAME="AMOUNT" VALUE=""><br><br>
+<label>PaidAmount:</label>	<INPUT TYPE="number" NAME="paidamount"  VALUE="0"><br><br>
+<label>WayBill:</label>	<INPUT TYPE="number" NAME="awb" VALUE=""><br><br><br>
+<input type="button" id="Save" onclick="f1()" value="Request LC"/></center>
+
+</form>
+<center>
+ <table>
+  <tr><td id="lcId"></td></tr>
+ <tr><td id="buyer"></td></tr>
+ </table></center>
+ <footer> Designed by Group3 Labs</footer> 
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!Issue LC : Get LC page before issuing LC.>
+
+<!DOCTYPE html>
+<html>
+<head>
+<TITLE>Trade Finance </TITLE>
+
+
+<header> 
+<h1 style="text-align: center; font-size:50px;">TRADE FINANCE SOLUTIONS </h1> 
+<!img src="C:\Users\TIGER\Desktop\Harish\TradeFinanceAssignment\CapStoneProject/logo1.gif" alt="logo" />
+	<div align="right">          
+	<input type="button" onclick=window.open('index.html','_self') value="Logout"/>
+    </div>
+</header> 
+
+
+
+<style>
+
+.bg {
+  /* The image used */
+ /* background-image: url("https://www.pymnts.com/wp-content/uploads/2019/02/surecomp-trade-finance-api.jpg");*/
+background-image: url("https://www.synergyintrade.com/wp-content/uploads/2017/10/import-trade-finance.jpg");
+  /* Full height */
+  height: 100%; 
+  <!filter: blur(2px);>
+  
+  
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header {
+  background-color: #00264d;
+  padding: 1px;
+  text-align: left;
+  font-size: 12px;
+  color: white;
+}	
+
+footer {
+  background-color: #669;
+  padding: 10px 0;
+  text-align: center;
+  color: white;
+  width: 100%;
+}	
+
+label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+ 
+}​
+	
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child() {
+  background-color: #dddddd;
+}
+</style>
+ 
+ <script>
+ /*window.onload = function() 
+ {*/
+	/*document.getElementById("Save").onclick = function fun() */
+	function getLCfun()
+	{
+		var x = document.forms["myForm"]["LCID"].value;
+
+		const params = {
+			lcId:x
+		}
+		const payload = "lcId=" + x;
+		 var Url='http://184.105.118.112:3000/tfbc/getLC';
+		 var xhr = new XMLHttpRequest();
+		 xhr.open('POST', Url, true);
+		 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		 xhr.send(payload);
+		 console.log(params);
+		 xhr.onreadystatechange = processRequest;
+		function processRequest(e) 
+		{ 
+			if (xhr.readyState == 4 && xhr.status == 200) 
+			{
+				 alert(xhr.responseText);
+				 var response1 = JSON.parse(xhr.responseText);
+				 alert(response1);
+				 console.log(response1);
+				 document.getElementById("lcId").innerHTML = response1.lcId;
+				 document.getElementById("buyer").innerHTML = response1.buyer;
+				 document.getElementById("buyerbank").innerHTML = response1.buyerbank;
+				 document.getElementById("sellerbank").innerHTML = response1.sellerbank;
+				 document.getElementById("seller").innerHTML = response1.seller;
+				 document.getElementById("carrier").innerHTML = response1.carrier;
+				 document.getElementById("expiryDate").innerHTML = response1.expiryDate;
+				 document.getElementById("amount").innerHTML = response1.amount;
+				 document.getElementById("paidamount").innerHTML = response1.paidamount;
+				 document.getElementById("awb").innerHTML = response1.awb;
+				 document.getElementById("status").innerHTML = response1.status;				 
+			 }
+		}
+	}
+	function issueLCfun()
+	{
+		var x1 = document.forms["myForm"]["LCID"].value;
+
+		const params = {
+			lcId:x1
+		}
+		const payload1 = "lcId=" + x1;
+		
+		var Url1='http://184.105.118.112:3000/tfbc/issueLC';
+		 var xhr1 = new XMLHttpRequest();
+		 xhr1.open('POST', Url1, true);
+		 xhr1.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		 xhr1.send(payload1);
+		 xhr1.onreadystatechange = processRequest1;
+		 function processRequest1(e) {
+			alert(xhr1.status);
+			if (xhr1.readyState == 4 || xhr1.status == 0) {
+				//alert(xhr.responseText.headers.Host);
+				var response1 = JSON.parse(xhr1.responseText);
+				showArtists(response1);  
+				alert(response1);
+			}
+		}
+	}
+ 
+</script>
+</head>
+<body>  
+
+  <h2 style="text-align: center;">Welcome to the Buyer Bank. Load and Validate LC details to issue LC</h2> 
+  <div id="Issue Lc" class="tabcontent">
+ <form name="myForm">
+ <center>
+<label>Enter a valid LC ID:</label>	
+	<INPUT TYPE="text" NAME="LCID"  VALUE="LC051">
+	<input type="button" id="Save" onclick="getLCfun()" value="Get LC"/>
+	 </center>
+	  <br>
+</form>
+<center>
+ <table border="1">
+ <tr style="text-align: center;"><td>LC Id :</td><td id="lcId"></td></tr>
+ <tr><td>Buyer :</td><td id="buyer"></td></tr>
+ <tr style="text-align: center;"><td>Buyer Bank :</td><td id="buyerbank"></td></tr>
+ <tr><td>Seller Bank :</td><td id="sellerbank"></td></tr>
+ <tr style="text-align: center;"><td>Seller :</td><td id="seller"></td></tr>
+ <tr><td>Carrier :</td><td id="carrier"></td></tr>
+ <tr style="text-align: center;"><td>Expiry Date :</td><td id="expiryDate"></td></tr>
+ <tr><td>Amount :</td><td id="amount"></td></tr>
+ <tr style="text-align: center;"><td>Paid Amount :</td><td id="paidamount"></td></tr>
+ <tr><td>WayBill :</td><td id="awb"></td></tr>
+ <tr style="text-align: center;"><td>Status :</td><td id="status"></td></tr>
+ </table>
+ <br>
+  <input type="button" id="Save" onclick="issueLCfun()" value="Issue LC"/>
+ </center>
+ <br><br> 
+ </center>
+ <br><br> 
+ </center>
+ </div>
+</body>
+</html>

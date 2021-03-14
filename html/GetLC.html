@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<TITLE>Trade Finance </TITLE>
+
+
+<header> 
+	
+	<h1 style="text-align: center; font-size:50px;">TRADE FINANCE SOLUTIONS </h1>
+	<div align="right">          
+	<input type="button" onclick=window.open('index.html','_self') value="Logout"/>
+    </div>
+</header> 
+<style>
+
+header {
+  background-color: #00264d;
+  padding: 1px;
+  text-align: left;
+  font-size: 12px;
+  color: white;
+}	
+
+footer {
+  background-color: #00264d;
+  padding: 10px 0;
+  text-align: center;
+  color: white;
+  width: 100%;
+}	
+
+label {
+  display: inline-block;
+  width: 140px;
+  text-align: right;
+}​
+	
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+  font-weight: bold;
+}
+
+tr:nth-child() {
+  background-color: white;
+}
+
+</style>
+ <script>
+ window.onload = function() {
+ document.getElementById("Save").onclick = function fun() {
+ var lcidvalue = document.forms["myForm"]["LCID"].value;
+ 
+  const params = {
+		lcId:lcidvalue,
+    }
+	const payload = "lcId=" + lcidvalue;
+		 var Url='http://184.105.118.112:3000/tfbc/getLC';
+		 var xhr = new XMLHttpRequest();
+		 xhr.open('POST', Url, true);
+		 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		 xhr.send(payload);
+		 //xhr.send(JSON.stringify(params));
+		 console.log(params);
+		 xhr.onreadystatechange = processRequest;
+		 function processRequest(e) {
+		
+		if (xhr.readyState == 4 && xhr.status == 200) {
+				 var response1 = JSON.parse(xhr.responseText);
+				 console.log(response1);
+				 document.getElementById("lcId").innerHTML = response1.lcId;
+				 document.getElementById("buyer").innerHTML = response1.buyer;
+				 document.getElementById("buyerbank").innerHTML = response1.buyerbank;
+				 document.getElementById("sellerbank").innerHTML = response1.sellerbank;
+				 document.getElementById("seller").innerHTML = response1.seller;
+				 document.getElementById("carrier").innerHTML = response1.carrier;
+				 document.getElementById("expiryDate").innerHTML = response1.expiryDate;
+				 document.getElementById("amount").innerHTML = response1.amount;
+				 document.getElementById("paidamount").innerHTML = response1.paidamount;
+				 document.getElementById("awb").innerHTML = response1.awb;
+				 document.getElementById("status").innerHTML = response1.status;
+		 }
+	
+ }
+ }
+ }
+</script>
+</head>
+<body> 
+
+  <h1 style="text-align: center; color:#00264d"><b>Enter LCID to retrieve LC Details</b></h1> 
+  <div id="Get Lc" class="tabcontent">
+ <form name="myForm">
+<center>
+
+<label>Enter a valid LC ID:</label>	
+	<INPUT TYPE="text" NAME="LCID"  VALUE="">
+	<input type="button" id="Save" onclick="f1()" value="Retrieve LC"/>
+	 </center>
+	  <br>
+</form>
+
+<center> <table>
+  <label><tr><td>LC ID :</td> </label><td id="lcId"></td></tr>
+  <label><tr><td>Buyer :</td> </label><td id="buyer"></td></tr>
+  <label><tr><td>BuyerBank :</td> </label><td id="buyerbank"></td></tr>
+  <label><tr><td>SellerBank :</td> </label><td id="sellerbank"></td></tr>
+  <label><tr><td>Seller :</td> </label><td id="seller"></td></tr>
+  <label><tr><td>Carrier :</td> </label><td id="carrier"></td></tr>
+  <label><tr><td>ExpiryDate :</td> </label><td id="expiryDate"></td></tr>
+  <label><tr><td>Amount :</td> </label><td id="amount"></td></tr>
+  <label><tr><td>PaidAmount :</td> </label><td id="paidamount"></td></tr>
+  <label><tr><td>WayBill :</td> </label><td id="awb"></td></tr>
+  <label><tr><td>Status :</td> </label><td id="status"></td></tr>
+ </table>
+</center>
+ <br><br> 
+ </center>
+ <footer> Designed by Group3 Labs</footer> 
+
+</body>
+</html>
